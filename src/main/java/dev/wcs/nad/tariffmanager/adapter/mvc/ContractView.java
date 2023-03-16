@@ -35,8 +35,12 @@ public class ContractView {
         // 1. Read Contracts for User from Service
         // 2. Map Contract objects to ContractInfoDto objects and add to List
         // 3. Redirect to a new page "customerContractsListView"
+        for (Contract contract: contractService.readContractsForUser(custId)) {
+            contractInfoDtos.addAll(entityToDtoMapper.contractsToContractInfosDto(List.of(contract)));
+        }
+        model.addAttribute("contracts", contractInfoDtos);
 
-        return null;
+        return "customerContractsListView";
     }
 
 }
